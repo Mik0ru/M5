@@ -12,28 +12,34 @@ import com.example.m5.databinding.FragmentResultBinding
 
 class ResultFragment : Fragment() {
 
-        private var binding: FragmentResultBinding? = null
-        private val args: ResultFragmentArgs by navArgs()
+    private var _binding: FragmentResultBinding? = null
+    private val binding get() = _binding!!
+    private val args: ResultFragmentArgs by navArgs()
 
-        override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            binding = FragmentResultBinding.inflate(inflater, container, false)
-            return binding?.root
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentResultBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-            binding?.apply {
-                firstName.text = args.result?.firstName
-                secondName.text = args.result?.secondName
-                percentage.text = args.result?.percentage + "%"
-                result.text = args.result?.result
-                tryAgainBtn.setOnClickListener {
-                    findNavController().navigateUp()
-                }
+        binding.apply {
+            firstName.text = args.result?.firstName
+            secondName.text = args.result?.secondName
+            percentage.text = args.result?.percentage + "%"
+            result.text = args.result?.result
+            tryAgainBtn.setOnClickListener {
+                findNavController().navigateUp()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

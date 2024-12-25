@@ -1,5 +1,6 @@
-package com.example.m5.data
+package com.example.m5.data.network
 
+import com.example.m5.data.model.LoveModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -13,5 +14,5 @@ interface ApiService {
         @Query("sname") secondName:String,
         @Header("x-rapidapi-key") key :String,
         @Header("x-rapidapi-host") host: String,
-    ): Call<CalculateResult>
+    ): Call<LoveModel>
 }

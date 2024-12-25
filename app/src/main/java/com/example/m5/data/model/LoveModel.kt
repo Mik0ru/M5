@@ -1,10 +1,10 @@
-package com.example.m5.data
+package com.example.m5.data.model
 
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class CalculateResult(
+data class LoveModel(
     @SerializedName("fname")
     val firstName:String,
     @SerializedName("sname")
