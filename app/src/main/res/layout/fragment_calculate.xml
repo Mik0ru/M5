@@ -24,7 +24,7 @@
             <com.airbnb.lottie.LottieAnimationView
                 app:lottie_loop="true"
                 app:lottie_autoPlay="true"
-                app:lottie_fileName="calculate_lottie.json"
+                app:lottie_fileName="result_lottie.json"
                 android:id="@+id/animView"
                 android:layout_marginTop="48dp"
                 android:layout_width="match_parent"
