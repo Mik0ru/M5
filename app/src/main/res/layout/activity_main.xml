@@ -5,49 +5,23 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_result"
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/my_nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/nav_graph"
+        app:defaultNavHost="true"
+        tools:layout="@layout/fragment_calculate" />
+
+    <Button
+        android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="160dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="36sp"
-        android:textColor="@color/white"
-        tools:text="Counter"
         />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_decrement"
-        android:text="-"
-        android:textSize="40sp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/tv_result"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_increment"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:backgroundTint="@color/white" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_increment"
-        android:text="+"
-        android:textSize="40sp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_decrement"
-        app:layout_constraintTop_toTopOf="@id/btn_decrement"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:backgroundTint="@color/white" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
