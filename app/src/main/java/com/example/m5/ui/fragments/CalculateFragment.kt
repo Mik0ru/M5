@@ -10,13 +10,8 @@ import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.m5.Constants
 import com.example.m5.data.ViewModel.LoveViewModel
-import com.example.m5.data.model.LoveModel
-import com.example.m5.data.network.RetrofitInstance
 import com.example.m5.databinding.FragmentCalculateBinding
-import retrofit2.Call
-import retrofit2.Response
 
 
 class CalculateFragment : Fragment() {

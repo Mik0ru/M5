@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.CalculateFragment">
+    tools:context="com.example.m5.ui.fragments.CalculateFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
@@ -25,7 +25,7 @@
             <com.airbnb.lottie.LottieAnimationView
                 app:lottie_loop="true"
                 app:lottie_autoPlay="true"
-                app:lottie_fileName="calculate_lottie.json"
+                app:lottie_fileName="result_lottie.json"
                 android:id="@+id/animView"
                 android:layout_marginTop="48dp"
                 android:layout_width="match_parent"
