@@ -1,49 +1,47 @@
-package com.example.m5.data.presenter
+package com.example.m5.data.ViewModel
 
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.m5.Constants
 import com.example.m5.data.model.LoveModel
 import com.example.m5.data.network.RetrofitInstance
-import com.example.m5.data.view.LoveView
 import retrofit2.Call
 import retrofit2.Response
 
-class LovePresenter {
-    private var loveView: LoveView? = null
+class LoveViewModel : ViewModel() {
 
-    fun attachView(loveView: LoveView) {
-        this.loveView = loveView
-    }
-    fun detachView() {
-        loveView = null
-    }
+    val data = MutableLiveData<LoveModel?>()
+    val error = MutableLiveData<String?>()
+    val loading = MutableLiveData<Boolean>()
 
-    fun onCalculateClick(firstName: String, secondName: String){
-        loveView?.showLoading(true)
+    fun onCalculateClick(firstName: String, secondName: String) {
+        loading.value = true
         RetrofitInstance.api.getPercentage(
             firstName = firstName,
             secondName = secondName,
             key = Constants.API_KEY,
             host = Constants.API_HOST
         ).enqueue(object : retrofit2.Callback<LoveModel> {
+
             override fun onResponse(
                 call: Call<LoveModel>,
                 response: Response<LoveModel>
             ) {
                 if (response.isSuccessful && response.body() != null) {
                     val loveModel = response.body()!!
-                    loveView?.showLoading(false)
-                    loveView?.showResult(loveModel)
+                    data.value = loveModel
+                } else {
+                    error.value = response.message()
                 }
-                else{
-                    loveView?.showLoading(false)
-                    loveView?.showToast("Error")
-                }
+                loading.value = false
             }
 
             override fun onFailure(call: Call<LoveModel>, t: Throwable) {
-                loveView?.showLoading(false)
-                loveView?.showToast(t.message.toString())
+                error.value = t.message
+                loading.value = false
             }
+
         })
+
     }
 }
