@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_calculateFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
+        <action
+            android:id="@+id/action_calculateFragment_to_history"
+            app:destination="@id/history" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
@@ -25,4 +28,14 @@
         app:nullable="true"
         android:defaultValue="@null" />
     </fragment>
+    <fragment
+        android:id="@+id/history"
+        android:name="com.example.m5.ui.fragments.History"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_history_to_calculateFragment"
+            app:destination="@id/calculateFragment" />
+    </fragment>
+    <fragment android:id="@+id/placeholder" />
 </navigation>

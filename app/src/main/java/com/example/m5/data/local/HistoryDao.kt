@@ -10,14 +10,14 @@ import androidx.room.Update
 interface HistoryDao {
 
     @Insert
-    fun insertHistory(entity: HistoryEntity)
+    suspend fun insertHistory(entity: HistoryEntity)
 
     @Delete
-    fun deleteHistory(entity: HistoryEntity)
+    suspend fun deleteHistory(entity: HistoryEntity)
 
     @Update
-    fun updateHistory(entity: HistoryEntity)
+    suspend fun updateHistory(entity: HistoryEntity)
 
     @Query("SELECT * FROM history")
-    fun getAll(): List<HistoryEntity>
+    suspend fun getAll(): List<HistoryEntity>
 }

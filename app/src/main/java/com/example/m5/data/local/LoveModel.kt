@@ -8,11 +8,11 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "history")
 data class HistoryEntity(
     @ColumnInfo("first_name")
-    val firstName:String,
+    var firstName:String,
     @ColumnInfo("second_nane")
-    val secondName:String,
-    val percentage: String,
-    val result: String,
+    var secondName:String,
+    var percentage: String,
+    var result: String,
 ){
     @PrimaryKey(autoGenerate = true)
     var id : Int = 0

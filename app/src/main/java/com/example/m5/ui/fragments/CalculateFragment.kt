@@ -8,16 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.m5.Module
+import com.example.m5.R
 import com.example.m5.data.ViewModel.LoveViewModel
 import com.example.m5.databinding.FragmentCalculateBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class CalculateFragment : Fragment() {
+class CalculateFragment : Fragment()   {
 
     private var _binding: FragmentCalculateBinding? = null
     private val binding get() = _binding!!
@@ -36,7 +39,6 @@ class CalculateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.calculateBtn.setOnClickListener {
             viewModel.onCalculateClick(
                 binding.firstName.text.toString(),
@@ -53,7 +55,6 @@ class CalculateFragment : Fragment() {
                     CalculateFragmentDirections.actionCalculateFragmentToResultFragment(loveModel)
                 )
                 viewModel.data.value = null
-                Module
             }
         }
 
@@ -78,7 +79,14 @@ class CalculateFragment : Fragment() {
                 }
             }
         }
+        setUpListeners()
 
+    }
+
+    private fun setUpListeners(){
+        binding.btnHistory.setOnClickListener(){
+            findNavController().navigate(R.id.action_calculateFragment_to_history)
+        }
     }
 
     override fun onDestroyView() {

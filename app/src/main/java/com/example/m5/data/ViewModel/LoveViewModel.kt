@@ -2,6 +2,7 @@ package com.example.m5.data.ViewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.m5.Constants
 import com.example.m5.data.local.HistoryDao
 import com.example.m5.data.local.HistoryDatabase
@@ -9,6 +10,7 @@ import com.example.m5.data.local.HistoryEntity
 import com.example.m5.data.network.model.LoveModel
 import com.example.m5.data.network.ApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,10 +44,11 @@ class LoveViewModel @Inject constructor(
                 if (response.isSuccessful && response.body() != null) {
                     val loveModel = response.body()!!
                     data.value = loveModel
-                    historyDatabase.historyDao().insertHistory(
-                        HistoryEntity(loveModel.firstName,loveModel.secondName,
-                        loveModel.percentage,loveModel.result)
-                    )
+                    viewModelScope.launch {
+                     historyDao.insertHistory(
+                         HistoryEntity(loveModel.firstName,loveModel.secondName,
+                         loveModel.percentage,loveModel.result)
+                     )}
 
 
                 } else {

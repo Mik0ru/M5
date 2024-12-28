@@ -37,14 +37,6 @@ object Module {
     @Provides
     @Singleton
     fun provideRoomDatabase(application: Application, ): HistoryDatabase{
-       // if (historyDatabase == null){
-        //    Room.databaseBuilder(
-         //       application,
-       //         HistoryDatabase::class.java,
-       //         "historyDatabase"
-      //          ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
-      //  }
-      //  return historyDatabase
       return Room.databaseBuilder(application, HistoryDatabase::class.java, "historyDatabase").build()
     }
 
