@@ -3,6 +3,8 @@ package com.example.m5.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.m5.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+
 
 class MainActivity : AppCompatActivity() {
 

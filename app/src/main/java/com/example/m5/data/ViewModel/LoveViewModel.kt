@@ -3,12 +3,24 @@ package com.example.m5.data.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.m5.Constants
-import com.example.m5.data.model.LoveModel
-import com.example.m5.data.network.RetrofitInstance
+import com.example.m5.data.local.HistoryDao
+import com.example.m5.data.local.HistoryDatabase
+import com.example.m5.data.local.HistoryEntity
+import com.example.m5.data.network.model.LoveModel
+import com.example.m5.data.network.ApiService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import javax.inject.Inject
 
-class LoveViewModel : ViewModel() {
+@HiltViewModel
+class LoveViewModel @Inject constructor(
+   private val apiService: ApiService,
+   private val historyDao: HistoryDao,
+    private val historyDatabase: HistoryDatabase
+) : ViewModel() {
 
     val data = MutableLiveData<LoveModel?>()
     val error = MutableLiveData<String?>()
@@ -16,12 +28,12 @@ class LoveViewModel : ViewModel() {
 
     fun onCalculateClick(firstName: String, secondName: String) {
         loading.value = true
-        RetrofitInstance.api.getPercentage(
+        apiService.getPercentage(
             firstName = firstName,
             secondName = secondName,
             key = Constants.API_KEY,
             host = Constants.API_HOST
-        ).enqueue(object : retrofit2.Callback<LoveModel> {
+        ).enqueue(object : Callback<LoveModel> {
 
             override fun onResponse(
                 call: Call<LoveModel>,
@@ -30,6 +42,12 @@ class LoveViewModel : ViewModel() {
                 if (response.isSuccessful && response.body() != null) {
                     val loveModel = response.body()!!
                     data.value = loveModel
+                    historyDatabase.historyDao().insertHistory(
+                        HistoryEntity(loveModel.firstName,loveModel.secondName,
+                        loveModel.percentage,loveModel.result)
+                    )
+
+
                 } else {
                     error.value = response.message()
                 }

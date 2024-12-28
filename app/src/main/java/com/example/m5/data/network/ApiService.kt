@@ -1,6 +1,6 @@
 package com.example.m5.data.network
 
-import com.example.m5.data.model.LoveModel
+import com.example.m5.data.network.model.LoveModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header

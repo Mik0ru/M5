@@ -8,17 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.m5.Module
 import com.example.m5.data.ViewModel.LoveViewModel
 import com.example.m5.databinding.FragmentCalculateBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CalculateFragment : Fragment() {
 
     private var _binding: FragmentCalculateBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by lazy { ViewModelProvider(this)[LoveViewModel::class.java] }
+    private val viewModel : LoveViewModel by viewModels()
+//    private val viewModel by lazy { ViewModelProvider(this)[LoveViewModel::class.java] }
 
 
     override fun onCreateView(
@@ -49,6 +53,7 @@ class CalculateFragment : Fragment() {
                     CalculateFragmentDirections.actionCalculateFragmentToResultFragment(loveModel)
                 )
                 viewModel.data.value = null
+                Module
             }
         }
 

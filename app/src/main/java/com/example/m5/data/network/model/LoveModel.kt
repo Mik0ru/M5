@@ -1,4 +1,4 @@
-package com.example.m5.data.model
+package com.example.m5.data.network.model
 
 
 import com.google.gson.annotations.SerializedName
